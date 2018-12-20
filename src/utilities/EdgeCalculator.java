@@ -110,18 +110,27 @@ public class EdgeCalculator {
            throw new NoIntersection();
        } 
    }
+      
+   public static Vertex getDirectionalVector(Edge a)
+   {
+       return new Vertex(a.getP2().getX() - a.getP1().getX(), a.getP2().getY() - a.getP1().getY());
+   }
+   
+   public static float calculateScalar(Edge a, Edge b)
+   {    
+       Vertex c = getDirectionalVector(a);
+       Vertex d = getDirectionalVector(b);
+       
+       return (c.getX() * d.getX() + c.getY() * d.getY());
+   }
    
    public static float calculateAngle(Edge a, Edge b) throws NoIntersection
    {
        if(intersects(a, b))
        {
-           float tanAngle = (calculateGradient(a) - calculateGradient(b)) / (1 + calculateGradient(a) * calculateGradient(b));
+           float cosAngle = calculateScalar(a,b) / (calculateLength(a) * calculateLength(b));
            
-           if(tanAngle < 0)
-           {
-               return 180 + (float) Math.toDegrees(Math.atan(tanAngle));
-           }
-           return (float) Math.toDegrees(Math.atan(tanAngle));
+           return 180.0f + (-1.0f * (float) Math.abs(Math.toDegrees(Math.acos(cosAngle))));
        }
        else
        {
