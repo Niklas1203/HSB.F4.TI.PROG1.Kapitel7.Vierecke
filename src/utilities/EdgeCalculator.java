@@ -130,7 +130,7 @@ public class EdgeCalculator {
        {
            float cosAngle = calculateScalar(a,b) / (calculateLength(a) * calculateLength(b));
            
-           return (float) Math.toDegrees(Math.acos(cosAngle));
+           return 180.0f + (-1.0f * (float) Math.abs(Math.toDegrees(Math.acos(cosAngle))));
        }
        else
        {
