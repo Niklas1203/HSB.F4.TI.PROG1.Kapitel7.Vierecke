@@ -3,24 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exceptions;
+package exceptions.viereckExceptions;
 
 /**
  *
  * @author nikla
  */
-public class KeinKonvexesViereck extends IllegalArgumentException
-{
-    private String err = "";
-    
+public class KeinKonvexesViereck extends KeinViereck
+{    
     public KeinKonvexesViereck()
     {
-        this.err = "Das Viereck ist nicht konvex!";
-    }
-    
-    @Override
-    public String toString()
-    {
-        return this.err;
+        super("Das Viereck ist nicht konvex!");
     }
 }

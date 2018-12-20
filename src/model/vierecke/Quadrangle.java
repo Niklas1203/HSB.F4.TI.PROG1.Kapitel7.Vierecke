@@ -1,6 +1,6 @@
 package model.vierecke;
 
-import exceptions.KeinViereck;
+import exceptions.viereckExceptions.KeinViereck;
 import exceptions.NoIntersection;
 import model.Edge;
 import model.Face;

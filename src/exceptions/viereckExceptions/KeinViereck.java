@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exceptions;
+package exceptions.viereckExceptions;
 
 /**
  *
@@ -18,9 +18,19 @@ public class KeinViereck extends IllegalArgumentException
         this.err = "Das Viereck ist kein Viereck!";
     }
     
+    public KeinViereck(String err)
+    {
+        this.err = err;
+    }
+    
+    public String getError()
+    {
+        return this.err;
+    }
+    
     @Override
     public String toString()
     {
-        return this.err;
+        return this.getError();
     }
 }
