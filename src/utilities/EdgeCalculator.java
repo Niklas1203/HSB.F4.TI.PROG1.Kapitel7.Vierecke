@@ -15,34 +15,34 @@ import exceptions.NoIntersection;
  */
 public class EdgeCalculator {
     
-    public static boolean between(float border1, float border2, float toTest)
+    public static boolean istZwischen(float ersteGrenze, float zweiteGrenze, float Wert)
    {
-       return toTest >= border1 && toTest <= border2 
-               || toTest <= border1 && toTest >= border2;
+       return Wert >= ersteGrenze && Wert <= zweiteGrenze 
+               || Wert <= ersteGrenze && Wert >= zweiteGrenze;
    }
    
-   public static boolean contains(Edge a, Vertex x)
+   public static boolean pruefeObGeradePunktEnthaelt(Edge a, Vertex x)
    {
-       float m = calculateGradient(a);
-       float b = calculateYIntersection(a, m);
+       float m = berechneSteigung(a);
+       float b = berechneYAchsenAbschnitt(a, m);
        
        if(Float.isInfinite(m))
        {
-           return a.getP1().getX() == x.getX() && between(a.getP1().getY(), a.getP2().getY(), x.getY());
+           return a.getP1().getX() == x.getX() && istZwischen(a.getP1().getY(), a.getP2().getY(), x.getY());
        }
        else
        {
            float intersection = m * x.getX() + b;
-           return intersection == x.getY() && between(a.getP1().getX(), a.getP2().getX(), intersection);
+           return intersection == x.getY() && istZwischen(a.getP1().getX(), a.getP2().getX(), intersection);
        }
    }
     
-    public static boolean intersects(Edge a, Edge b)
+    public static boolean pruefeObGeradenSichSchneiden(Edge a, Edge b)
    {
        float x = 0.0f;
        try
        {
-           x = calculateIntersection(a,b);
+           x = berechneSchnittstelle(a,b);
        } 
        catch (NoIntersection e)
        {
@@ -50,15 +50,15 @@ public class EdgeCalculator {
        }
        
        /* in our case, we have to make sure, that the calculated x-value lies somewhere between the minimal and maximal x-value of the two edges. */
-       return between(a.getP1().getX(), a.getP2().getX(), x) && between(b.getP1().getX(), b.getP2().getX(), x); 
+       return istZwischen(a.getP1().getX(), a.getP2().getX(), x) && istZwischen(b.getP1().getX(), b.getP2().getX(), x); 
    }
    
-    public static float calculateLength(Edge e)
+    public static float berechneLaenge(Edge e)
    {
-       return calculateLength(e.getP1(), e.getP2());
+       return berechneLaenge(e.getP1(), e.getP2());
    }
    
-   public static float calculateLength(Vertex a, Vertex b)
+   public static float berechneLaenge(Vertex a, Vertex b)
    {
        double differenceX = b.getX() - a.getX();
        double differenceY = b.getY() - a.getY();
@@ -66,7 +66,7 @@ public class EdgeCalculator {
        return (float) Math.pow(differenceX * differenceX + differenceY * differenceY, 0.5);
    }
    
-   public static float calculateGradient(Edge a)
+   public static float berechneSteigung(Edge a)
    {
        if(a.getP1().getX() == a.getP2().getX())
        {
@@ -78,15 +78,15 @@ public class EdgeCalculator {
        }
    }
    
-   public static float calculateYIntersection(Edge a, float m)
+   public static float berechneYAchsenAbschnitt(Edge a, float m)
    {
        return (a.getP1().getY() - m * a.getP1().getX());
    }
    
-      public static float calculateIntersection(Edge a, Edge b) throws NoIntersection
+      public static float berechneSchnittstelle(Edge a, Edge b) throws NoIntersection
    {
-       float m1 = EdgeCalculator.calculateGradient(a);
-       float m2 = EdgeCalculator.calculateGradient(b);
+       float m1 = EdgeCalculator.berechneSteigung(a);
+       float m2 = EdgeCalculator.berechneSteigung(b);
        
        
        if(Float.isInfinite(m1) && Float.isInfinite(m2))
@@ -103,7 +103,7 @@ public class EdgeCalculator {
        }
        else if(m1 != m2)
        {
-           return (((calculateYIntersection(b, m2)) - (calculateYIntersection(a, m1))) / (m1 - m2));
+           return (((berechneYAchsenAbschnitt(b, m2)) - (berechneYAchsenAbschnitt(a, m1))) / (m1 - m2));
        }
        else
        {
@@ -111,24 +111,24 @@ public class EdgeCalculator {
        } 
    }
       
-   public static Vertex getDirectionalVector(Edge a)
+   public static Vertex berechneRichtungsvektor(Edge a)
    {
        return new Vertex(a.getP2().getX() - a.getP1().getX(), a.getP2().getY() - a.getP1().getY());
    }
    
-   public static float calculateScalar(Edge a, Edge b)
+   public static float berechneSkalarprodukt(Edge a, Edge b)
    {    
-       Vertex c = getDirectionalVector(a);
-       Vertex d = getDirectionalVector(b);
+       Vertex c = berechneRichtungsvektor(a);
+       Vertex d = berechneRichtungsvektor(b);
        
        return (c.getX() * d.getX() + c.getY() * d.getY());
    }
    
-   public static float calculateAngle(Edge a, Edge b) throws NoIntersection
+   public static float berechneWinkel(Edge a, Edge b) throws NoIntersection
    {
-       if(intersects(a, b))
+       if(pruefeObGeradenSichSchneiden(a, b))
        {
-           float cosAngle = calculateScalar(a,b) / (calculateLength(a) * calculateLength(b));
+           float cosAngle = berechneSkalarprodukt(a,b) / (EdgeCalculator.berechneLaenge(a) * EdgeCalculator.berechneLaenge(b));
            
            return 180.0f + (-1.0f * (float) Math.abs(Math.toDegrees(Math.acos(cosAngle))));
        }

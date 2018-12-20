@@ -1,30 +1,29 @@
 package utilities;
 
-import model.vierecke.Trapezoid;
-import model.vierecke.Rectangle;
+import model.vierecke.Trapez;
+import model.vierecke.Rechteck;
 import model.vierecke.Parallelogramm;
 import model.vierecke.Rhombus;
-import model.vierecke.ConvexQuadrangle;
-import model.*;
-import control.Verifier;
+import model.vierecke.KonvexesViereck;
 import exceptions.NoIntersection;
+import model.Edge;
 
 public class GeometrieCalculator
 {  
-   public static float calculatePerimeter(ConvexQuadrangle c)
+   public static float berechneUmfang(KonvexesViereck c)
    {
-       return EdgeCalculator.calculateLength(c.getA()) + EdgeCalculator.calculateLength(c.getB()) 
-               + EdgeCalculator.calculateLength(c.getC()) + EdgeCalculator.calculateLength(c.getD());
+       return EdgeCalculator.berechneLaenge(c.getA()) + EdgeCalculator.berechneLaenge(c.getB()) 
+               + EdgeCalculator.berechneLaenge(c.getC()) + EdgeCalculator.berechneLaenge(c.getD());
    }
-   public static float calculateArea(Trapezoid t)
+   public static float berechneFlaecheninhalt(Trapez t)
    {
        float height = 0.0f;
        float zaehler = 0.0f;
        
-       if(getParallels(t) == 'y')
+       if(bestimmeParallelen(t) == 'y')
        {
            height = t.getC().getP1().getY() - t.getA().getP1().getY();
-           zaehler = EdgeCalculator.calculateLength(t.getA()) + EdgeCalculator.calculateLength(t.getC());
+           zaehler = EdgeCalculator.berechneLaenge(t.getA()) + EdgeCalculator.berechneLaenge(t.getC());
        }
        else
        {
@@ -34,9 +33,9 @@ public class GeometrieCalculator
    }
    
        
-    private static char getParallels(Trapezoid a)
+    private static char bestimmeParallelen(Trapez a)
     {
-        if(EdgeCalculator.calculateGradient(a.getA()) == EdgeCalculator.calculateGradient(a.getC()))
+        if(EdgeCalculator.berechneSteigung(a.getA()) == EdgeCalculator.berechneSteigung(a.getC()))
         {
             return 'y';
         }
@@ -46,29 +45,29 @@ public class GeometrieCalculator
         }
     }
    
-   public static float calculateArea(Parallelogramm p)
+   public static float berechneFlaecheninhalt(Parallelogramm p)
    {    
        float angle = 0.0f;
        try
        {
-           angle = EdgeCalculator.calculateAngle(p.getA(), p.getB());
+           angle = EdgeCalculator.berechneWinkel(p.getA(), p.getB());
        } catch(NoIntersection e) //kann theoretisch nicht vorkommen, muss trotzdem sein: evtl gesonderte Methode
        {
        
        }
-       return (float) (Math.sin(Math.toRadians(angle)) * EdgeCalculator.calculateLength(p.getA()) * EdgeCalculator.calculateLength(p.getB()));
+       return (float) (Math.sin(Math.toRadians(angle)) * EdgeCalculator.berechneLaenge(p.getA()) * EdgeCalculator.berechneLaenge(p.getB()));
    }
    
-   public static float calculateArea(Rhombus r)
+   public static float berechneFlaecheninhalt(Rhombus r)
    {
        Edge a = new Edge(r.getP1(), r.getP3());
        Edge b = new Edge(r.getP2(), r.getP4());
        
-       return EdgeCalculator.calculateLength(a) * EdgeCalculator.calculateLength(b) * 0.5f;
+       return EdgeCalculator.berechneLaenge(a) * EdgeCalculator.berechneLaenge(b) * 0.5f;
    }
    
-   public static float calculateArea(Rectangle r)
+   public static float berechneFlaecheninhalt(Rechteck r)
    {
-       return EdgeCalculator.calculateLength(r.getA()) * EdgeCalculator.calculateLength(r.getB());
+       return EdgeCalculator.berechneLaenge(r.getA()) * EdgeCalculator.berechneLaenge(r.getB());
    }
 }

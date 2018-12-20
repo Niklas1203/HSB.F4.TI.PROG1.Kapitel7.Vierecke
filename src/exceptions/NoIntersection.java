@@ -12,21 +12,21 @@ import model.Edge;
  */
 public class NoIntersection extends Exception
 {
-    String message;
+    String err;
     
     public NoIntersection()
     {
-        this.message = "The given Graphs do not intersect!";
+        this.err = "Die angegebenen Graphen schneiden sich nicht!";
     }
     
     public NoIntersection(Edge a, Edge b)
     {
-        this.message = String.format("Graph a: %S and Graph B: %S do not intersect!", a.toString(), b.toString());
+        this.err = String.format("Graph a: %S und Graph B: %S schneiden sich nicht!", a.toString(), b.toString());
     }
     
     @Override 
     public String toString()
     {
-        return this.message;
+        return this.err;
     }
 }
