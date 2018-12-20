@@ -5,7 +5,8 @@
  */
 package model.vierecke;
 
-import control.Verifier;
+import control.Verifizierer;
+import exceptions.viereckExceptions.KeinRhombus;
 import model.Vertex;
 /**
  *
@@ -13,9 +14,12 @@ import model.Vertex;
  */
 public class Rhombus extends Parallelogramm
 {
-    public Rhombus(Vertex a, Vertex b, Vertex c, Vertex d)
+    public Rhombus(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinRhombus
     {
         super(a,b,c,d);
-        Verifier.isRhombus(this);
+        if(!Verifizierer.verifiziere(this))
+        {
+            throw new KeinRhombus();
+        }
     }
 }

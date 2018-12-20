@@ -6,20 +6,20 @@
 package model.vierecke;
 
 import control.Verifizierer;
-import exceptions.viereckExceptions.KeinParallelogramm;
+import exceptions.viereckExceptions.KeinQuadrat;
 import model.Vertex;
 /**
  *
- * @author nikla
+ * @author Niklas
  */
-public class Parallelogramm extends Trapez
+public class Quadrat extends Rhombus implements Rechtwinklig
 {
-    public Parallelogramm(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinParallelogramm
+    public Quadrat(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinQuadrat
     {
         super(a,b,c,d);
         if(!Verifizierer.verifiziere(this))
         {
-            throw new KeinParallelogramm();
+            throw new KeinQuadrat();
         }
     }
 }

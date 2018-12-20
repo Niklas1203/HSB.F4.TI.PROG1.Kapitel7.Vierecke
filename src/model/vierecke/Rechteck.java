@@ -6,20 +6,20 @@
 package model.vierecke;
 
 import control.Verifizierer;
-import exceptions.viereckExceptions.KeinParallelogramm;
+import exceptions.viereckExceptions.KeinRechteck;
 import model.Vertex;
 /**
  *
  * @author nikla
  */
-public class Parallelogramm extends Trapez
+public class Rechteck extends Parallelogramm
 {
-    public Parallelogramm(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinParallelogramm
+    public Rechteck(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinRechteck
     {
         super(a,b,c,d);
         if(!Verifizierer.verifiziere(this))
         {
-            throw new KeinParallelogramm();
+            throw new KeinRechteck();
         }
     }
 }

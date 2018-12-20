@@ -7,7 +7,7 @@ import model.Face;
 import model.Vertex;
 import utilities.EdgeCalculator;
 
-public abstract class Quadrangle extends Face
+public abstract class Viereck extends Face
 {
     private final Edge a;
     private final Edge b;
@@ -18,7 +18,7 @@ public abstract class Quadrangle extends Face
     private final float gamma;
     private final float delta;
     
-    public Quadrangle(Edge a, Edge b, Edge c, Edge d) throws KeinViereck
+    public Viereck(Edge a, Edge b, Edge c, Edge d) throws KeinViereck
     {        
         this.a = a;
         this.b = b;
@@ -27,10 +27,10 @@ public abstract class Quadrangle extends Face
         
         try
         {
-            this.alpha = EdgeCalculator.calculateAngle(this.d, this.a);
-            this.beta = EdgeCalculator.calculateAngle(this.a, this.b);
-            this.gamma = EdgeCalculator.calculateAngle(this.b, this.c);
-            this.delta = EdgeCalculator.calculateAngle(this.c, this.d);  
+            this.alpha = EdgeCalculator.berechneWinkel(this.d, this.a);
+            this.beta = EdgeCalculator.berechneWinkel(this.a, this.b);
+            this.gamma = EdgeCalculator.berechneWinkel(this.b, this.c);
+            this.delta = EdgeCalculator.berechneWinkel(this.c, this.d);  
         }
         catch(NoIntersection e)
         {
@@ -38,7 +38,7 @@ public abstract class Quadrangle extends Face
         }
     }
     
-    public Quadrangle(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinViereck
+    public Viereck(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinViereck
     {
         this.a = new Edge(a,b);
         this.b = new Edge(b,c);
@@ -47,10 +47,10 @@ public abstract class Quadrangle extends Face
         
         try
         {
-            this.alpha = EdgeCalculator.calculateAngle(this.a, this.b);
-            this.beta = EdgeCalculator.calculateAngle(this.b, this.c);
-            this.gamma = EdgeCalculator.calculateAngle(this.c, this.d);
-            this.delta = EdgeCalculator.calculateAngle(this.d, this.a);  
+            this.alpha = EdgeCalculator.berechneWinkel(this.a, this.b);
+            this.beta = EdgeCalculator.berechneWinkel(this.b, this.c);
+            this.gamma = EdgeCalculator.berechneWinkel(this.c, this.d);
+            this.delta = EdgeCalculator.berechneWinkel(this.d, this.a);  
         }
         catch(NoIntersection e)
         {

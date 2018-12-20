@@ -6,20 +6,22 @@
 package model.vierecke;
 
 import control.Verifizierer;
-import exceptions.viereckExceptions.KeinParallelogramm;
+import exceptions.viereckExceptions.KeinKonvexesViereck;
 import model.Vertex;
+
 /**
  *
  * @author nikla
  */
-public class Parallelogramm extends Trapez
+public class KonvexesViereck extends Viereck
 {
-    public Parallelogramm(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinParallelogramm
+    
+    public KonvexesViereck(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinKonvexesViereck
     {
         super(a,b,c,d);
         if(!Verifizierer.verifiziere(this))
         {
-            throw new KeinParallelogramm();
+            throw new KeinKonvexesViereck();
         }
     }
 }

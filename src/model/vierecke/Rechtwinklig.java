@@ -9,6 +9,9 @@ package model.vierecke;
  *
  * @author Niklas
  */
-public interface Rectangular {
-    public static final int RECTANGULAR_ANGLES = 4;
+public interface Rechtwinklig {
+    public float getAlpha();
+    public float getBeta();
+    public float getGamma();
+    public float getDelta();
 }

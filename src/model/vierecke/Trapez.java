@@ -5,7 +5,8 @@
  */
 package model.vierecke;
 
-import control.Verifier;
+import control.Verifizierer;
+import exceptions.viereckExceptions.KeinTrapez;
 import model.Vertex;
 
 
@@ -13,11 +14,14 @@ import model.Vertex;
  *
  * @author nikla
  */
-public class Trapezoid extends ConvexQuadrangle
+public class Trapez extends KonvexesViereck
 {
-    public Trapezoid(Vertex a, Vertex b, Vertex c, Vertex d)
+    public Trapez(Vertex a, Vertex b, Vertex c, Vertex d) throws KeinTrapez
     {
         super(a,b,c,d);
-        Verifier.isTrapezoid(this);
+        if(!Verifizierer.verifiziere(this))
+        {
+            throw new KeinTrapez();
+        }
     }
 }
