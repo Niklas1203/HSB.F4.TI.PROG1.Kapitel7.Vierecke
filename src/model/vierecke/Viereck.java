@@ -47,10 +47,10 @@ public abstract class Viereck extends Face
         
         try
         {
-            this.alpha = EdgeCalculator.berechneWinkel(this.a, this.b);
-            this.beta = EdgeCalculator.berechneWinkel(this.b, this.c);
-            this.gamma = EdgeCalculator.berechneWinkel(this.c, this.d);
-            this.delta = EdgeCalculator.berechneWinkel(this.d, this.a);  
+            this.alpha = EdgeCalculator.berechneWinkel(this.d, this.a);
+            this.beta = EdgeCalculator.berechneWinkel(this.a, this.b);
+            this.gamma = EdgeCalculator.berechneWinkel(this.b, this.c);
+            this.delta = EdgeCalculator.berechneWinkel(this.c, this.d);  
         }
         catch(NoIntersection e)
         {
