@@ -32,7 +32,7 @@ public class Verifier
        
        return EdgeCalculator.intersects(a,b) && !EdgeCalculator.contains(a, v.getP2()) 
                && !EdgeCalculator.contains(a, v.getP4()) && !EdgeCalculator.contains(b, v.getP1())
-               && !EdgeCalculator.contains(a, v.getP3());
+               && !EdgeCalculator.contains(b, v.getP3());
    }
    
    public static boolean isParallelogramm(Parallelogramm p)
