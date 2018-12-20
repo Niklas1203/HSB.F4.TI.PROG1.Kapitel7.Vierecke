@@ -27,10 +27,10 @@ public abstract class Quadrangle extends Face
         
         try
         {
-            this.alpha = EdgeCalculator.calculateAngle(this.a, this.b);
-            this.beta = EdgeCalculator.calculateAngle(this.b, this.c);
-            this.gamma = EdgeCalculator.calculateAngle(this.c, this.d);
-            this.delta = EdgeCalculator.calculateAngle(this.d, this.a);  
+            this.alpha = EdgeCalculator.calculateAngle(this.d, this.a);
+            this.beta = EdgeCalculator.calculateAngle(this.a, this.b);
+            this.gamma = EdgeCalculator.calculateAngle(this.b, this.c);
+            this.delta = EdgeCalculator.calculateAngle(this.c, this.d);  
         }
         catch(NoIntersection e)
         {
