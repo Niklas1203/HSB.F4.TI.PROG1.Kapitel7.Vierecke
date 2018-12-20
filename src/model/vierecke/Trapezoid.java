@@ -5,10 +5,9 @@
  */
 package model.vierecke;
 
-import model.vierecke.ConvexQuadrangle;
-import exceptions.*;
-import control.Verifier;import model.Vertex;
-;
+import control.Verifier;
+import model.Vertex;
+
 
 /**
  *
@@ -19,14 +18,6 @@ public class Trapezoid extends ConvexQuadrangle
     public Trapezoid(Vertex a, Vertex b, Vertex c, Vertex d)
     {
         super(a,b,c,d);
-        this.verify();
-    }
-    
-    private void verify()
-    {
-        if(!Verifier.isTrapezoid(this))
-        {
-            System.out.println("Kein Trapez");
-        }
+        Verifier.isTrapezoid(this);
     }
 }

@@ -5,8 +5,7 @@
  */
 package model.vierecke;
 
-import control.Verifier;;
-import exceptions.NoIntersection;
+import control.Verifier;
 import model.Vertex;
 /**
  *
@@ -17,14 +16,6 @@ public class Rectangle extends Parallelogramm
     public Rectangle(Vertex a, Vertex b, Vertex c, Vertex d)
     {
         super(a,b,c,d);
-        this.verify();
-    }
-    
-    private void verify()
-    {
-        if(!Verifier.isRectangular(this))
-        {
-            System.out.println("Kein Rechteck");
-        }
+        Verifier.isRectangular(this);
     }
 }

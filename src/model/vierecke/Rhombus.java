@@ -5,8 +5,8 @@
  */
 package model.vierecke;
 
-import control.Verifier;import model.Vertex;
-;
+import control.Verifier;
+import model.Vertex;
 /**
  *
  * @author nikla
@@ -16,14 +16,6 @@ public class Rhombus extends Parallelogramm
     public Rhombus(Vertex a, Vertex b, Vertex c, Vertex d)
     {
         super(a,b,c,d);
-        this.verify();
-    }
-    
-    private void verify()
-    {
-        if(!Verifier.isRhombus(this))
-        {
-            System.out.println("Kein Rhombus");
-        }
+        Verifier.isRhombus(this);
     }
 }
