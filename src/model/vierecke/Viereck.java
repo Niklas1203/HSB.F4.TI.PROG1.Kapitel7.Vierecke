@@ -5,7 +5,7 @@ import exceptions.NoIntersection;
 import model.Edge;
 import model.Face;
 import model.Vertex;
-import utilities.EdgeCalculator;
+import utilities.EdgeRechner;
 
 public abstract class Viereck extends Face
 {
@@ -27,10 +27,10 @@ public abstract class Viereck extends Face
         
         try
         {
-            this.alpha = EdgeCalculator.berechneWinkel(this.d, this.a);
-            this.beta = EdgeCalculator.berechneWinkel(this.a, this.b);
-            this.gamma = EdgeCalculator.berechneWinkel(this.b, this.c);
-            this.delta = EdgeCalculator.berechneWinkel(this.c, this.d);  
+            this.alpha = EdgeRechner.berechneWinkel(this.d, this.a);
+            this.beta = EdgeRechner.berechneWinkel(this.a, this.b);
+            this.gamma = EdgeRechner.berechneWinkel(this.b, this.c);
+            this.delta = EdgeRechner.berechneWinkel(this.c, this.d);  
         }
         catch(NoIntersection e)
         {
@@ -47,10 +47,10 @@ public abstract class Viereck extends Face
         
         try
         {
-            this.alpha = EdgeCalculator.berechneWinkel(this.d, this.a);
-            this.beta = EdgeCalculator.berechneWinkel(this.a, this.b);
-            this.gamma = EdgeCalculator.berechneWinkel(this.b, this.c);
-            this.delta = EdgeCalculator.berechneWinkel(this.c, this.d);  
+            this.alpha = EdgeRechner.berechneWinkel(this.d, this.a);
+            this.beta = EdgeRechner.berechneWinkel(this.a, this.b);
+            this.gamma = EdgeRechner.berechneWinkel(this.b, this.c);
+            this.delta = EdgeRechner.berechneWinkel(this.c, this.d);  
         }
         catch(NoIntersection e)
         {

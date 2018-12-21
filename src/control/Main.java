@@ -5,7 +5,7 @@
  */
 package control;
 
-import model.vierecke.Square;
+import model.vierecke.*;
 import model.*;
 import exceptions.NoIntersection;
 import utilities.*;
@@ -17,6 +17,6 @@ public class Main
 {
     public static void main(String[] args) throws NoIntersection
     {
-        Square s = new Square(new Vertex(0,1), new Vertex(1,1), new Vertex(1,0), new Vertex(0,0));
+        
     }
 }

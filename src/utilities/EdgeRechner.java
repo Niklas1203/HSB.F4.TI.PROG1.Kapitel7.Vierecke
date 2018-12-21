@@ -13,7 +13,7 @@ import exceptions.NoIntersection;
  *
  * @author Niklas
  */
-public class EdgeCalculator {
+public class EdgeRechner {
     
     public static boolean istZwischen(float ersteGrenze, float zweiteGrenze, float Wert)
    {
@@ -85,8 +85,8 @@ public class EdgeCalculator {
    
       public static float berechneSchnittstelle(Edge a, Edge b) throws NoIntersection
    {
-       float m1 = EdgeCalculator.berechneSteigung(a);
-       float m2 = EdgeCalculator.berechneSteigung(b);
+       float m1 = EdgeRechner.berechneSteigung(a);
+       float m2 = EdgeRechner.berechneSteigung(b);
        
        
        if(Float.isInfinite(m1) && Float.isInfinite(m2))
@@ -128,7 +128,7 @@ public class EdgeCalculator {
    {
        if(pruefeObGeradenSichSchneiden(a, b))
        {
-           float cosAngle = berechneSkalarprodukt(a,b) / (EdgeCalculator.berechneLaenge(a) * EdgeCalculator.berechneLaenge(b));
+           float cosAngle = berechneSkalarprodukt(a,b) / (EdgeRechner.berechneLaenge(a) * EdgeRechner.berechneLaenge(b));
            
            return 180.0f + (-1.0f * (float) Math.abs(Math.toDegrees(Math.acos(cosAngle))));
        }
