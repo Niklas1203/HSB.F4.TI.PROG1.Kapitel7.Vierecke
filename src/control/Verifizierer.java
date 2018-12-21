@@ -11,7 +11,7 @@ import model.vierecke.Parallelogramm;
 import model.vierecke.Rhombus;
 import model.vierecke.Quadrat;
 import model.vierecke.Trapez;
-import utilities.EdgeCalculator;
+import utilities.EdgeRechner;
 import model.vierecke.Rechtwinklig;
 
 /**
@@ -21,49 +21,80 @@ import model.vierecke.Rechtwinklig;
 public class Verifizierer 
 {
     /**
-    * This method tests, if a Quadrangle is convex
-    * @param v the Quadrangle that is to be investigated
-    * @return true if the Quadrangle is convex, false if it is not
+    * Diese Methode verifiziert, dass ein Viereck konvex ist
+    * @param v das Viereck, dass verifiziert werden soll
+    * @return true wenn das Viereck konvex ist
     */
+    
    public static boolean verifiziere(KonvexesViereck v)
    {
        Edge a = new Edge(v.getP1(), v.getP3());
        Edge b = new Edge(v.getP4(), v.getP2());
        
-       return EdgeCalculator.pruefeObGeradenSichSchneiden(a,b) && !EdgeCalculator.pruefeObGeradePunktEnthaelt(a, v.getP2()) 
-               && !EdgeCalculator.pruefeObGeradePunktEnthaelt(a, v.getP4()) && !EdgeCalculator.pruefeObGeradePunktEnthaelt(b, v.getP1())
-               && !EdgeCalculator.pruefeObGeradePunktEnthaelt(b, v.getP3());
+       return EdgeRechner.pruefeObGeradenSichSchneiden(a,b) && !EdgeRechner.pruefeObGeradePunktEnthaelt(a, v.getP2()) 
+               && !EdgeRechner.pruefeObGeradePunktEnthaelt(a, v.getP4()) && !EdgeRechner.pruefeObGeradePunktEnthaelt(b, v.getP1())
+               && !EdgeRechner.pruefeObGeradePunktEnthaelt(b, v.getP3());
    }
+   
+   /**
+    * Diese Methode verifiziert, dass ein Viereck ein Parallelogramm ist
+    * @param p Das Parallelogramm, das getestet werden soll
+    * @return true, wenn das Viereck ein Parellelogramm ist
+    */
    
    public static boolean verifiziere(Parallelogramm p)
     {
-        return EdgeCalculator.berechneSteigung(p.getA()) == EdgeCalculator.berechneSteigung(p.getC())
-               && EdgeCalculator.berechneSteigung(p.getB()) == EdgeCalculator.berechneSteigung(p.getD());
+        return EdgeRechner.berechneSteigung(p.getA()) == EdgeRechner.berechneSteigung(p.getC())
+               && EdgeRechner.berechneSteigung(p.getB()) == EdgeRechner.berechneSteigung(p.getD());
     }
    
+   /**
+    * Diese Methode verifiziert, dass ein Viereck ein Rhombus ist
+    * @param r Der Rhombus, der getetstet werden soll
+    * @return true, wenn das Viereck ein Rhombus ist
+    */
+   
+   public static boolean verifiziere(Rhombus r)
+    {
+        float a = EdgeRechner.berechneLaenge(r.getA());
+        float b = EdgeRechner.berechneLaenge(r.getB());
+        float c = EdgeRechner.berechneLaenge(r.getC());
+        float d = EdgeRechner.berechneLaenge(r.getD());
+        
+        return a == b && b == c && c == d;
+    }
+   
+   /**
+    * Diese Methode verifiziert, dass ein Viereck ein Quadrat ist
+    * @param q Das Quadrat, das getestet werden soll
+    * @return true, wenn das Viereck ein Quadrat ist
+    */
+   
+    public static boolean verifiziere(Quadrat q)
+    {
+        return Verifizierer.verifiziere(q) && istRechtwinklig(q);
+    }
+    
+    /**
+     * Diese Methode testet, ob ein Objekt vom Typen Rechtwinklig tatsächlich rechtwinklig ist
+     * @param r Das Objekt, das getestet werden soll
+     * @return true, wenn das Objekt rechtwinklig ist
+     */
+    
    private static boolean istRechtwinklig(Rechtwinklig r)
     {
         return r.getAlpha() == r.getBeta() && r.getBeta() == r.getGamma() && r.getGamma() == r.getDelta() && r.getAlpha() == 90.0f;
     }
    
-   public static boolean verifiziere(Rhombus r)
-    {
-        float a = EdgeCalculator.berechneLaenge(r.getA());
-        float b = EdgeCalculator.berechneLaenge(r.getB());
-        float c = EdgeCalculator.berechneLaenge(r.getC());
-        float d = EdgeCalculator.berechneLaenge(r.getD());
-        
-        return a == b && b == c && c == d;
-    }
+   /**
+    * Diese Methode verifiziert, dass ein Viereck ein Trapez ist
+    * @param t Das Trapez, das getestet werden soll
+    * @return true, wenn das Viereck ein Trapez ist
+    */
    
-   public static boolean verifiziere(Quadrat s)
+   public static boolean verifiziere(Trapez t)
     {
-        return Verifizierer.verifiziere(s) && istRechtwinklig(s);
-    }
-   
-   public static boolean verifiziere(Trapez a)
-    {
-        return EdgeCalculator.berechneSteigung(a.getA()) == EdgeCalculator.berechneSteigung(a.getC())
-               || EdgeCalculator.berechneSteigung(a.getB()) == EdgeCalculator.berechneSteigung(a.getD());
+        return EdgeRechner.berechneSteigung(t.getA()) == EdgeRechner.berechneSteigung(t.getC())
+               || EdgeRechner.berechneSteigung(t.getB()) == EdgeRechner.berechneSteigung(t.getD());
     }
 }
