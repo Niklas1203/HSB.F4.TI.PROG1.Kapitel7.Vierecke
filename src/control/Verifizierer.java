@@ -72,7 +72,7 @@ public class Verifizierer
    
     public static boolean verifiziere(Quadrat q)
     {
-        return Verifizierer.verifiziere(q) && istRechtwinklig(q);
+        return verifiziere((Rhombus) q) && istRechtwinklig(q);
     }
     
     /**
